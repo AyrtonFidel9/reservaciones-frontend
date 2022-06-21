@@ -1,5 +1,19 @@
+@import "@fontsource/nunito";
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: content-box;
+}
+
+body{
+  font-family: 'Nunito';
+}
+
+
 .App {
   text-align: center;
+  
 }
 
 .App-logo {
@@ -27,6 +41,60 @@
 .App-link {
   color: #61dafb;
 }
+
+.presentacion{
+  width: 100vw;
+  height: 90vh;
+  background-image: url('./img/restaurante.jpg');
+  background-size: cover;
+  color: aliceblue;
+  display: flex;
+  align-items: left;
+  flex-direction: column;
+  justify-content: center;
+  text-shadow: 2px 3px 5px black;
+}
+.presentacion > div{
+  width: 50%;
+  margin-left: 50px;
+}
+
+.presentacion > div > h1{
+  margin-bottom: 10px;
+  font-size: 60px;
+  
+}
+
+.presentacion div p{
+  font-size: 20px;
+}
+#calificacion{
+  margin-top: 30px;
+  width: 97%;
+  margin: 0 auto;
+  font-size: 19px;
+  float: right;
+  display: grid;
+  justify-content: flex-end;
+  position: absolute;
+  top: 82%;
+}
+
+.card{
+  background-color: rgba(139, 139, 139, 0.555);
+  width: 400px;
+  height: 65px;
+  padding-top: 5px;
+  padding-left: 10px;
+  position: relative;
+  left: 10%;
+}
+
+#comida{
+  width: 100vw;
+  height: 100vh;
+}
+
 
 @keyframes App-logo-spin {
   from {
