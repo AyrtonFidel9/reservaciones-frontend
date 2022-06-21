@@ -6,6 +6,8 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
 import Grid from '@mui/material/Grid';
+import IngresarReserva from './IngresarReserva';
+//import UseFormControl from '../components/Input';
 
 
 
@@ -42,20 +44,10 @@ const ResponsiveAppBar = () => {
                     textAlign: 'center', 
                     float: 'right' }}>
                     <Button
-                    variant="text"  
-                    href="#comida" sx={{width: 'auto', marginRight: 5}}
-                    >
-                        Menú
-                    </Button>
-                </Box>
-                <Box sx={{
-                    textAlign: 'center', 
-                    float: 'right' }}>
-                    <Button
                     variant="outlined"  
-                    href="/reserva" sx={{width: 200}}
+                    href="/" sx={{width: 200}}
                     >
-                        Hacer reservacion
+                        Ir al inicio
                     </Button>
                 </Box>
                 
@@ -64,4 +56,16 @@ const ResponsiveAppBar = () => {
     );
 }
 
-export default ResponsiveAppBar;
+
+const Reserva = () =>{
+    return (
+        <div>
+            <ResponsiveAppBar/>
+            <IngresarReserva/>
+            
+        </div>
+    
+    );
+}
+
+export default Reserva;

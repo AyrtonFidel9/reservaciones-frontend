@@ -1,4 +1,5 @@
 import ResponsiveAppBar from '../components/Menu.jsx';
+import React from'react';
 import Comida from '../components/Categoria';
 import '../App.css';
 import "@fontsource/nunito";
@@ -29,7 +30,6 @@ const Inicio = () => {
               <h4>Promedio de satisfaccion del cliente</h4>
               <p>⭐⭐⭐⭐</p>
             </div>
-              
           </div>
         </section>
         <section id="comida">
