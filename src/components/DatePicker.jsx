@@ -12,6 +12,8 @@ export default function DatePickerIn(props) {
 
     const { name, label, value, onChange } = props
 
+
+
     return (
         <LocalizationProvider dateAdapter={AdapterDateFns}>
             <DatePicker
@@ -20,6 +22,8 @@ export default function DatePickerIn(props) {
                 name={name}
                 onChange={(newValue) => {
                     setValues(newValue);
+                    console.log(newValue);
+                    onChange('fecha',newValue.toLocaleDateString("en-CA"));
                 }}
                 renderInput={(params) => <TextField {...params} />}
             />

@@ -4,47 +4,45 @@ import Typography from '@mui/material/Typography';
 import { Button } from "@mui/material";
 
 
-class Mesas extends Component{
+class Mesas extends Component {
     constructor(props) {
         super(props);
-    
+
         this.state = {
             bgColor: 'whitesmoke',
             nombreBoton: 'Seleccionar',
-            contador: 1
+            contador: 1,
         };
-      }
-
-    async componentDidMount(){
-        /*const response = await fetch(urlMesas);
-        const body = await response.json();
-        this.setState({data: body});
-        console.log(body);*/
     }
 
-    pulsarBoton (event){
+    pulsarBoton(event) {
         console.log("cambiar colores------------");
 
-        this.setState({contador: this.state.contador + 1});
+
+
+        this.setState({ contador: this.state.contador + 1 });
         console.log(this.state.contador);
-        if(this.state.contador % 2 != 0){
-            this.setState({bgColor: '#64DD17', nombreBoton: 'Quitar'})
+        if (this.state.contador % 2 != 0) {
+            this.setState({ bgColor: '#64DD17', nombreBoton: 'Quitar' });
+            this.props.agregarMesas(this.props.clave);
         }
-        else{
-            this.setState({bgColor: 'whitesmoke', nombreBoton: 'Seleccionar'})
+        else {
+            this.setState({ bgColor: 'whitesmoke', nombreBoton: 'Seleccionar' });
+            this.props.removerMesas(this.props.clave);
         }
     }
 
-    render(){
+    render() {
 
-        const {nombre, tipo, asientos, clave} = this.props;
-        
-        
-        return(
-            <Card key={clave} sx={{width: 150, minWidth: 130,
-                m: 2, backgroundColor: this.state.bgColor, 
-                color: 'black'}}  variant="outlined">
-                <CardContent sx={{textAlign: 'center'}}>
+        const { nombre, tipo, asientos, clave} = this.props;
+
+        return (
+            <Card key={clave} sx={{
+                width: 150, minWidth: 130,
+                m: 2, backgroundColor: this.state.bgColor,
+                color: 'black'
+            }} variant="outlined">
+                <CardContent sx={{ textAlign: 'center' }}>
                     <Typography>
                         <b>{nombre}</b>
                     </Typography>
@@ -61,7 +59,6 @@ class Mesas extends Component{
             </Card>
         );
     }
-
 }
 
 export default Mesas;

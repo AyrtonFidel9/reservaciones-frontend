@@ -16,7 +16,10 @@ export default function BasicTimePicker(props) {
         value={value}
         name={name}
         onChange={(newValue) => {
+        
           setValue(newValue);
+          console.log(newValue.getTime());
+          onChange("hora", newValue.toLocaleTimeString());
         }}
         renderInput={(params) => <TextField {...params} />}
       />

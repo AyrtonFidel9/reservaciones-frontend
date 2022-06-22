@@ -17,6 +17,9 @@ const InputNumber = (props) =>{
             name={name}
             type="number"
             variant="outlined"
+            onChange={((e)=>{
+                onChange(e);
+            })}
          />
 
     );
