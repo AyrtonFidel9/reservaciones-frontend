@@ -8,38 +8,22 @@ import RestaurantIcon from '@mui/icons-material/Restaurant';
 import Grid from '@mui/material/Grid';
 import IngresarReserva from './IngresarReserva';
 //import UseFormControl from '../components/Input';
-
-
-
+import Logo from '../components/LogoHeader';
+import LeftBar from '../components/LeftBar';
+import { Container } from '@mui/system';
+import { RoofingTwoTone } from '@mui/icons-material';
+import styled from '@emotion/styled';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Router } from 'react-router-dom';
+import ReservasList from '../Reservas/ReservasList';
+import Inicio from './Inicio';
+import { Outlet } from 'react-router-dom';
 
 const ResponsiveAppBar = () => {
     return (
         <AppBar position="static" color="inherit">
             <Toolbar>
-                <Grid container spacing={2}>
-                    <Grid item>
-                        <RestaurantIcon/>
-                    </Grid>
-                    <Grid item >
-                        <Typography
-                            variant="h6"
-                            noWrap
-                            component="a"
-                            href="/"
-                            sx={{
-                                mr: 2,
-                                display: { xs: 'none', md: 'flex' },
-                                fontFamily: 'monospace',
-                                fontWeight: 700,
-                                letterSpacing: '.3rem',
-                                color: 'inherit',
-                                textDecoration: 'none',
-                            }}
-                        >
-                            LOGO
-                        </Typography>
-                    </Grid>
-                </Grid>
+                <Logo titulo="Restaurante"/>
                 <Box sx={{
                     textAlign: 'center', 
                     float: 'right' }}>
@@ -50,21 +34,26 @@ const ResponsiveAppBar = () => {
                         Ir al inicio
                     </Button>
                 </Box>
-                
             </Toolbar>
         </AppBar>
     );
 }
 
+const StyleDiv = styled('div',{})({
+    display: 'flex',
+    width: '100vw',
+    height: '100vh'
+});
 
-const Reserva = () =>{
+const Reserva = ({children}) =>{
     return (
-        <div>
+        <>
             <ResponsiveAppBar/>
-            <IngresarReserva/>
-            
-        </div>
-    
+            <StyleDiv>
+                <LeftBar/>
+                <Outlet/>
+            </StyleDiv>   
+        </>
     );
 }
 

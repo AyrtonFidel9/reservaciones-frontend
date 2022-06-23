@@ -14,8 +14,6 @@ const StyledPaper = styled(Paper, {})({
 
 
 const IngresarReserva = () =>{
-
-
     return (
         <StyledPaper>
             <ReservaForm />
