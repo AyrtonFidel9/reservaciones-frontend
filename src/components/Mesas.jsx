@@ -11,15 +11,21 @@ class Mesas extends Component {
         this.state = {
             bgColor: 'whitesmoke',
             nombreBoton: 'Seleccionar',
-            contador: 1,
+            contador: this.props.contador,
         };
+    }
+
+    componentDidMount() {
+        if (this.state.contador % 2 == 0) {
+            this.setState({ bgColor: '#64DD17', nombreBoton: 'Quitar' });
+        }
+        else {
+            this.setState({ bgColor: 'whitesmoke', nombreBoton: 'Seleccionar' });
+        }
     }
 
     pulsarBoton(event) {
         console.log("cambiar colores------------");
-
-
-
         this.setState({ contador: this.state.contador + 1 });
         console.log(this.state.contador);
         if (this.state.contador % 2 != 0) {

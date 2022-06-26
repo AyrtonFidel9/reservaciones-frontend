@@ -5,6 +5,7 @@ import IngresarReserva from './pages/IngresarReserva';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import "@fontsource/nunito";
 import ReservasList from './Reservas/ReservasList';
+import Login from './Login/Login';
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
           <Route path="ingresar" element={<IngresarReserva/>}/>
           <Route path="mis-reservas" element={<ReservasList/>}/>
         </Route>
+        <Route path="login" element={<Login/>}/>
       </Routes>
     </BrowserRouter>
   );

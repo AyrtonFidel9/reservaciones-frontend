@@ -12,7 +12,9 @@ export default function DatePickerIn(props) {
 
     const { name, label, value, onChange } = props
 
-
+    React.useEffect(()=>{
+        setValues(value);
+    },[value]);
 
     return (
         <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -20,6 +22,7 @@ export default function DatePickerIn(props) {
                 label={label}
                 value={values}
                 name={name}
+                inputFormat="yyyy/MM/dd"
                 onChange={(newValue) => {
                     setValues(newValue);
                     console.log(newValue);
