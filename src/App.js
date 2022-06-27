@@ -6,6 +6,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import "@fontsource/nunito";
 import ReservasList from './Reservas/ReservasList';
 import Login from './Login/Login';
+import PrivateRoute from './Security/RutaPrivada';
 
 
 function App() {
@@ -13,10 +14,12 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Inicio/>}/>
-        <Route path="/reserva" element={<Reserva/>}>
-          <Route index element={<IngresarReserva/>}/>
-          <Route path="ingresar" element={<IngresarReserva/>}/>
-          <Route path="mis-reservas" element={<ReservasList/>}/>
+        <Route path='/' element={<PrivateRoute/>}>
+          <Route path="/reserva" element={<Reserva/>}>
+            <Route index element={<IngresarReserva/>}/>
+            <Route path="ingresar" element={<IngresarReserva/>}/>
+            <Route path="mis-reservas" element={<ReservasList/>}/>
+          </Route>
         </Route>
         <Route path="login" element={<Login/>}/>
       </Routes>

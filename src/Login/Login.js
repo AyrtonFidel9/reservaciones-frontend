@@ -7,6 +7,10 @@ import styled from '@emotion/styled';
 import LoginBack from '../img/restauranteLogin.jpg';
 import InputPassword from '../components/InputPassword';
 import InputUserN from '../components/InputUser';
+import login from '../services/login';
+import { withCookies, Cookies } from "react-cookie";
+import { instanceOf } from 'prop-types';
+import withRouter from '../components/withRouter';
 
 const MyDiv = styled('div')({
     width: '100vw',
@@ -18,41 +22,59 @@ const MyDiv = styled('div')({
 });
 
 const MyForm = styled('form')({
-    width: "100%", 
-    display: "grid", 
+    width: "100%",
+    display: "grid",
     placeContent: "center"
 });
 
 
 class Login extends Component {
     usuarioEmpty = {
-        username: '',
+        usernameorEmail: '',
         password: ''
     }
 
-    constructor(props){
+    static propTypes = {
+        cookies: instanceOf(Cookies).isRequired
+    };
+
+    constructor(props) {
         super(props);
         this.state = {
-            data: this.usuarioEmpty
+            data: this.usuarioEmpty,
+            token: {},
+            userCookie: this.props.cookies.get("my-token") || ""
         }
         this.handleChange = this.handleChange.bind(this);
         this.submitData = this.submitData.bind(this);
     }
 
-    handleChange = (name, value) =>{
-        let item = {...this.state.data};
+    handleChange = (name, value) => {
+        let item = { ...this.state.data };
         item[name] = value;
-        this.setState({data: item});
+        this.setState({ data: item });
         //setData({[evt.target.name]: evt.target.value});
     }
 
-    submitData = () =>{
-        console.log(this.state.data);
+    submitData = async (evt) => {
+        evt.preventDefault();
+        const user = await login(this.state.data);
+        console.log(user);
+        if(user.ok){
+            const getToken = await user.json();
+            this.setState({ token: getToken });
+            this.props.cookies.set("my-token", getToken, {path: "/"});
+            this.setState({userCookie: this.props.cookies.get("my-token")})
+            this.props.router.navigate("/reserva");
+        }
+        else{
+            alert("Credenciales incorrectas. Por favor, reviselas!")
+        }
+
     }
 
-   
-    
-    render(){
+    render() {
+        
         return (
             <MyDiv>
                 <Box sx={{
@@ -69,14 +91,13 @@ class Login extends Component {
                     boxShadow: '1px 2px 10px 1px black'
                 }}>
                     <AccountCircleIcon sx={{ height: '4em', width: '4em' }} />
-                    <MyForm method="post">
-                        <InputUserN onChange={this.handleChange} name="username"/>
-                        <InputPassword onChange={this.handleChange} name="password"/>
+                    <MyForm onSubmit={this.submitData} method="post"
+                    >
+                        <InputUserN onChange={this.handleChange} name="usernameorEmail" />
+                        <InputPassword onChange={this.handleChange} name="password" />
                         <FormControl sx={{ marginTop: 5, width: '30ch' }}>
-                            <Button sx={{ margin: '0 auto', width: '25ch' }} 
-                            variant="outlined" onClick={()=>{
-                                console.log(this.state.data);
-                            }}
+                            <Button sx={{ margin: '0 auto', width: '25ch' }}
+                                variant="outlined" type="submit"
                             >Ingresar</Button>
                         </FormControl>
                     </MyForm>
@@ -86,4 +107,4 @@ class Login extends Component {
     }
 }
 
-export default Login;
+export default withRouter(withCookies(Login));
