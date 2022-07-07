@@ -6,6 +6,7 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import FilledInput from '@mui/material/FilledInput';
 import React, { useState } from 'react';
 import FormControl from '@mui/material/FormControl';
+import FormHelperText from '@mui/material/FormHelperText';
 
 
 const InputPassword = (props) => {
@@ -17,6 +18,7 @@ const InputPassword = (props) => {
 
     const name = props.name;
     const onChange = props.onChange;
+    const error = props.error == "" ? null : props.error;
     
 
     const handleChange = (prop) => (event) => {
@@ -37,7 +39,7 @@ const InputPassword = (props) => {
 
     return (
         <FormControl key='password' sx={{ marginTop: 5, width: '30ch' }} 
-        variant="filled">
+        variant="filled" {...(error && {error:true})}>
             <InputLabel htmlFor="filled-adornment-password">Contraseña</InputLabel>
             <FilledInput
                 name={name}
@@ -57,7 +59,10 @@ const InputPassword = (props) => {
                         </IconButton>
                     </InputAdornment>
                 }
+                
             />
+            <FormHelperText id="my-helper-text">{error && error}</FormHelperText>
+
         </FormControl>
     );
 }

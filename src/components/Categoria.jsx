@@ -4,7 +4,6 @@ import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
-import axios from 'axios';
 
 const urlMenu = "http://localhost:8080/api/menus/";
 const urlAlimento = "http://localhost:8080/api/alimentos/";
@@ -34,7 +33,7 @@ class Alimentos extends Component {
                             <CardMedia
                             component="img"
                             height="120"
-                            image="../img/restaurante.jpg"
+                            src={"data:image/jpg;base64,"+alimento.imagen}
                             alt="imagen alimento"
                             />
                             <CardContent>

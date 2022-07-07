@@ -18,41 +18,133 @@ import { Router } from 'react-router-dom';
 import ReservasList from '../Reservas/ReservasList';
 import Inicio from './Inicio';
 import { Outlet } from 'react-router-dom';
+import Tooltip from '@mui/material/Tooltip';
+import Menu from '@mui/material/Menu';
+import IconButton from '@mui/material/IconButton';
+import Avatar from '@mui/material/Avatar';
+import MenuItem from '@mui/material/MenuItem';
+import { useCookies, Cookies } from "react-cookie";
+import getUsuarioById from '../services/usuario';
+
+
+const settings = ['Perfil', 'Salir'];
+
 
 const ResponsiveAppBar = () => {
+    const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+    const cookie = new Cookies();
+    const [cookies, setCookies] = useCookies(cookie);
+    const [usuario, setUsuario] = React.useState({});
+
+    React.useEffect(()=>{
+        getUsuarioById(cookies["my-token"])
+            .then(res => setUsuario(res));
+    },[cookies["my-token"]]);
+
+    function stringToColor(string) {
+        let hash = 0;
+        let i;
+
+        /* eslint-disable no-bitwise */
+        for (i = 0; i < string.length; i += 1) {
+            hash = string.charCodeAt(i) + ((hash << 5) - hash);
+        }
+
+        let color = '#';
+
+        for (i = 0; i < 3; i += 1) {
+            const value = (hash >> (i * 8)) & 0xff;
+            color += `00${value.toString(16)}`.slice(-2);
+        }
+        /* eslint-enable no-bitwise */
+
+        return color;
+    }
+
+    const handleOpenUserMenu = (event) => {
+        setAnchorElUser(event.currentTarget);
+    };
+
+    const handleCloseUserMenu = () => {
+        setAnchorElUser(null);
+
+    };
+
+    function stringAvatar(name) {
+        return {
+            sx: {
+                bgcolor: stringToColor(name),
+            },
+            children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
+        };
+    }
+    
     return (
         <AppBar position="static" color="inherit">
             <Toolbar>
-                <Logo titulo="Restaurante"/>
+                <Logo titulo="Restaurante" />
                 <Box sx={{
-                    textAlign: 'center', 
-                    float: 'right' }}>
+                    textAlign: 'center',
+                    float: 'right'
+                }}>
                     <Button
-                    variant="outlined"  
-                    href="/" sx={{width: 200}}
+                        variant="outlined"
+                        href="/" sx={{ width: 200 }}
                     >
                         Ir al inicio
                     </Button>
+                </Box>
+                <Box sx={{ flexGrow: 0, marginLeft: '20px' }}>
+                    <Tooltip title="Open settings">
+                        <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                            <Avatar {...stringAvatar(usuario.nombre+" "+usuario.apellido)} />
+                        </IconButton>
+                    </Tooltip>
+                    <Menu
+                        sx={{ mt: '45px' }}
+                        id="menu-appbar"
+                        anchorEl={anchorElUser}
+                        anchorOrigin={{
+                            vertical: 'top',
+                            horizontal: 'right',
+                        }}
+                        keepMounted
+                        transformOrigin={{
+                            vertical: 'top',
+                            horizontal: 'right',
+                        }}
+                        open={Boolean(anchorElUser)}
+                        onClose={handleCloseUserMenu}
+                    >
+                        {settings.map((setting) => (
+                            <MenuItem sx={{ width: '150px' }}
+                                key={setting}
+                                onClick={handleCloseUserMenu}>
+                                <Typography textAlign="center">{setting}</Typography>
+                            </MenuItem>
+                        ))}
+                    </Menu>
                 </Box>
             </Toolbar>
         </AppBar>
     );
 }
 
-const StyleDiv = styled('div',{})({
+const StyleDiv = styled('div', {})({
     display: 'flex',
     width: '100vw',
     height: '100vh'
 });
 
-const Reserva = ({children}) =>{
+const Reserva = ({ children }) => {
     return (
         <>
-            <ResponsiveAppBar/>
+            <ResponsiveAppBar />
             <StyleDiv>
-                <LeftBar/>
-                <Outlet/>
-            </StyleDiv>   
+                <LeftBar />
+                <Outlet />
+            </StyleDiv>
         </>
     );
 }

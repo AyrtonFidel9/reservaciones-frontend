@@ -10,6 +10,9 @@ const InputUserN = (props) => {
 
     const onChange = props.onChange;
     const name = props.name;
+    const error = props.error == "" ? null : props.error;
+
+    //console.log(props);
 
     const handleChangeInput = (event) => {
         event.preventDefault();
@@ -22,7 +25,7 @@ const InputUserN = (props) => {
             id="filled-basic" label="Usuario" name={name} variant="filled"
             onChange={handleChangeInput}
             value={inputUser.value}
-            key='user'
+            {...(error && {error:true, helperText:error})}
         />
     );
 }
