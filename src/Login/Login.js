@@ -113,7 +113,6 @@ class Login extends Component {
             }});
             //alert("Credenciales incorrectas. Por favor, reviselas!")
         }
-
     }
 
     goToRecoveryPassword = () =>{

@@ -134,7 +134,7 @@ const ResponsiveAppBar = () => {
 const StyleDiv = styled('div', {})({
     display: 'flex',
     width: '100vw',
-    height: '100vh'
+    minHeight: '90vh'
 });
 
 const Reserva = ({ children }) => {

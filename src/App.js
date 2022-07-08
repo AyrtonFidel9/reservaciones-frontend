@@ -7,7 +7,7 @@ import "@fontsource/nunito";
 import ReservasList from './Reservas/ReservasList';
 import Login from './Login/Login';
 import PrivateRoute from './Security/RutaPrivada';
-
+import MiPerfil from './pages/Perfil';
 
 function App() {
   return (
@@ -19,6 +19,7 @@ function App() {
             <Route index element={<IngresarReserva/>}/>
             <Route path="ingresar" element={<IngresarReserva/>}/>
             <Route path="mis-reservas" element={<ReservasList/>}/>
+            <Route path="mi-perfil" element={<MiPerfil/>}/>
           </Route>
         </Route>
         <Route path="login" element={<Login/>}/>

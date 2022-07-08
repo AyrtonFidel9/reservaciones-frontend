@@ -11,7 +11,7 @@ import { NavLink } from 'react-router-dom';
 
 const options = [
     { name: "Mis reservas", link: "mis-reservas", icon: <TableBarIcon /> },
-    { name: "Mi Perfil", link: "#", icon: <AccountBoxIcon /> }
+    { name: "Mi Perfil", link: "mi-perfil", icon: <AccountBoxIcon /> }
 ]
 
 const MyButton = styled(Button)(({ theme }) => ({
@@ -27,7 +27,6 @@ const MyNavLink = styled(NavLink)({
 class LeftBar extends React.Component {
     render() {
         return (
-
             <Box sx={{ width: "17vw", backgroundColor: 'whitesmoke', paddingTop: 5 }}>
                 <Stack>
                     <ThemeProvider theme={theme}>
