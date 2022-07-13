@@ -29,7 +29,7 @@ class Mesas extends Component {
         this.setState({ contador: this.state.contador + 1 });
         console.log(this.state.contador);
         if (this.state.contador % 2 != 0) {
-            this.setState({ bgColor: '#64DD17', nombreBoton: 'Quitar' });
+            this.setState({ bgColor: '#03FF19', nombreBoton: 'Quitar' });
             this.props.agregarMesas(this.props.clave);
         }
         else {

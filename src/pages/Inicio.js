@@ -23,7 +23,6 @@ const Inicio = () => {
             <h1>Bienvenidos</h1>
             <p><i>"Es verdad que comer es una necesidad, pero comer con inteligencia es un arte"</i>
             </p>
-            
           </div>
           <div id="calificacion">
             <div className='card'>

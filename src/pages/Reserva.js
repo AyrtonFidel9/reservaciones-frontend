@@ -24,18 +24,28 @@ import IconButton from '@mui/material/IconButton';
 import Avatar from '@mui/material/Avatar';
 import MenuItem from '@mui/material/MenuItem';
 import { useCookies, Cookies } from "react-cookie";
-import getUsuarioById from '../services/usuario';
+import { getUsuarioById } from '../services/usuario';
+import { NavLink } from 'react-router-dom';
 
 
-const settings = ['Perfil', 'Salir'];
 
+const settings = [
+    {name: 'Perfil', link: 'mi-perfil'}, 
+    {name: 'Salir', link: '/login'}
+];
+
+const MyNavLink = styled(NavLink)({
+    textDecoration: 'none',
+});
 
 const ResponsiveAppBar = () => {
     const [anchorElUser, setAnchorElUser] = React.useState(null);
 
     const cookie = new Cookies();
-    const [cookies, setCookies] = useCookies(cookie);
+    const [cookies, setCookies, removeCookie] = useCookies(cookie);
     const [usuario, setUsuario] = React.useState({});
+
+    
 
     React.useEffect(()=>{
         getUsuarioById(cookies["my-token"])
@@ -68,8 +78,8 @@ const ResponsiveAppBar = () => {
 
     const handleCloseUserMenu = () => {
         setAnchorElUser(null);
-
     };
+
 
     function stringAvatar(name) {
         return {
@@ -118,11 +128,18 @@ const ResponsiveAppBar = () => {
                         onClose={handleCloseUserMenu}
                     >
                         {settings.map((setting) => (
-                            <MenuItem sx={{ width: '150px' }}
-                                key={setting}
-                                onClick={handleCloseUserMenu}>
-                                <Typography textAlign="center">{setting}</Typography>
-                            </MenuItem>
+                            <MyNavLink to={setting.link} key={setting.link}>
+                                <MenuItem sx={{ width: '150px' }}
+                                    key={setting.name}
+                                    onClick={()=>{
+                                        handleCloseUserMenu();
+                                        if(setting.link==="/login"){
+                                            removeCookie("my-token");                                            
+                                        }                                        
+                                    }}>
+                                    <Typography textAlign="center">{setting.name}</Typography>
+                                </MenuItem>
+                            </MyNavLink>
                         ))}
                     </Menu>
                 </Box>
