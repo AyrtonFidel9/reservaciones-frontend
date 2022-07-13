@@ -234,6 +234,7 @@ const MiPerfil = () => {
                             marginTop: '20px'
                         }}>
                             <Button variant="contained"
+                            color={nameButton.name === "Guardar" ? "success" : "primary"}
                             onClick={editEnable}>
                             {nameButton.name}</Button>
                         </Box>
